@@ -19,7 +19,7 @@ A Programação Dinâmica é aplicada para determinar a sequência ótima de ped
 | **Estado** | $S_t$ | O nível de estoque do insumo no início do dia $t$. |
 | **Decisão** | $D_t$ | A quantidade de insumos a ser pedida/reposta no dia $t$. |
 | **Função de Transição** | $S_{t+1}$ | Define o novo estado de estoque para o dia $t+1$: $$S_{t+1} = \max(0, S_t + D_t - C_t)$$ (Onde $C_t$ é o consumo do dia $t$). |
-| **Função Objetivo (Recorrência)** | $f(S_t)$ | O custo mínimo total acumulado de $t$ até $T$, dado o estoque $S_t$. A recorrência de Bellman é: $$f(S_t) = \min_{D_t} \left\{ \text{Custo Diário}(S_t, D_t, C_t) + f(S_{t+1}) \right\}$$. |
+| **Função Objetivo (Recorrência)** | $f(S_t)$ | O custo mínimo total acumulado de $t$ até $T$, dado o estoque $S_t$. A recorrência de Bellman é: $$f(S_t) = \min_{D_t} \{ \text{Custo Diário}(S_t, D_t, C_t) + f(S_{t+1}) \}$$. |
 
 ### 1.2. Definição Detalhada do Custo Diário
 
