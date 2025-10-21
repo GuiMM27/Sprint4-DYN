@@ -8,21 +8,30 @@ Modelagem do problema de reposição de insumos como um processo de decisão seq
 
 ---
 
-## 1. Formulação do Problema 
+## 1. Formulação do Problema
 
 A Programação Dinâmica é aplicada para determinar a sequência ótima de pedidos ($D_t$) que minimize o custo total acumulado ao longo de $T$ dias.
 
-### 1.1. Definição de Estados, Decisões, Função de Transição e Função Objetivo 
+### 1.1. Definição de Estados, Decisões, Função de Transição e Função Objetivo
 
 | Componente | Variável / Notação | Definição no Contexto |
 | :--- | :--- | :--- |
 | **Estado** | $S_t$ | O nível de estoque do insumo no início do dia $t$. |
 | **Decisão** | $D_t$ | A quantidade de insumos a ser pedida/reposta no dia $t$. |
 | **Função de Transição** | $S_{t+1}$ | Define o novo estado de estoque para o dia $t+1$: $$S_{t+1} = \max(0, S_t + D_t - C_t)$$ (Onde $C_t$ é o consumo do dia $t$). |
-| **Função Objetivo (Recorrência)** | $f(S_t)$ | O custo mínimo total acumulado de $t$ até $T$, dado o estoque $S_t$. $$f(S_t) = \min_{D_t} \left\{ \text{Custo Diário}(S_t, D_t, C_t) + f(S_{t+1}) \right\}$$ |
+| **Função Objetivo (Recorrência)** | $f(S_t)$ | O custo mínimo total acumulado de $t$ até $T$, dado o estoque $S_t$. A recorrência de Bellman é: $$f(S_t) = \min_{D_t} \left\{ \text{Custo Diário}(S_t, D_t, C_t) + f(S_{t+1}) \right\}$$. |
 
-**Custo Diário ($\text{Custo}(S_t, D_t, C_t)$):**
+### 1.2. Definição Detalhada do Custo Diário
+
+O Custo Diário ($\text{Custo}(S_t, D_t, C_t)$) é o custo imediato incorrido no dia $t$ e é a soma de três componentes:
+
 $$\text{Custo Total Diário} = \text{Custo de Pedido} + \text{Custo de Armazenamento} + \text{Custo de Falta}$$
+
+Expandindo a fórmula com os parâmetros de custo:
+
+$$\text{Custo Diário} = \underbrace{\left(K \cdot \mathbb{I}(D_t > 0) + c \cdot D_t\right)}_{\text{Custo de Pedido}} + \underbrace{\left(h \cdot S_{t+1}\right)}_{\text{Custo de Armazenamento}} + \underbrace{\left(p \cdot \max(0, C_t - (S_t + D_t))\right)}_{\text{Custo de Falta}}$$
+
+---
 
 ---
 
